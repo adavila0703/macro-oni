@@ -1,7 +1,7 @@
 ﻿# Macro-oni
 > Saves your repetitive work tasks into profiles and access them using an easy to use UI!
 
-![](macro-oni-ui.PNG)
+![](Images/macro-oni-ui.PNG)
 
 # Features
 * Naming of your macro profiles.
