@@ -1,7 +1,11 @@
 ﻿# Macro-oni
-> Saves your repetitive work tasks into profiles and access them using an easy to use UI!
+> Save your repetitive work tasks in Macro-oni and access them using an easy to use UI!
 
-![](Images/macro-oni-ui.PNG)
+
+![](img/macro-oni-ui.PNG)
+
+![](img/macro-example.gif)
+
 
 # Features
 * Naming of your macro profiles.
@@ -28,6 +32,6 @@
 
 
 # What's Next
-* Looping function which allows you to loop the same macro how ever many times you need.
+* Full keyboard + mouse functionality.
 * Ability to set a schedule to call your macros.
 

@@ -98,7 +98,7 @@ def macro_on():
     progon = True
     listcount = 0
     file_name = pro_name.get()
-    create_file = open(final_path + "\\" + file_name +".txt", "w")
+    create_file = open(final_path + "\\" + file_name, "w")
     while progon == True:
         recording()
     pro_name.delete(0, "end")
@@ -114,27 +114,31 @@ def playmacro():
     count = 0
     multiplyer = int(speed_multi.get())
     macrostart = m1.position
-    for l in lines:
-        search_chord = re.findall(r"\|", l)
-        search_sec = re.findall(r"\.", l)
-        is_cord = bool(search_chord)
-        is_sec = bool(search_sec)
-        if is_cord == True:
-            split_1 = l.split("|")
-            dx = split_1[0]
-            dy = split_1[1]
-            m1.position = (dx, dy)
-        still_going = m1.position
-        if l == "left\n":
-            m1.click(Button.left)
-        if l == "right\n":
-            m1.click(Button.right)
-        if is_sec == True:
-            timein = float(l)
-            addmult = timein * multiplyer
-            time.sleep(addmult)
-        if m1.position != still_going:
-            break
+    loop_count = 1
+    loops_selected = loop_multi.get()
+    while loop_count <= loops_selected:
+        for l in lines:
+            search_chord = re.findall(r"\|", l)
+            search_sec = re.findall(r"\.", l)
+            is_cord = bool(search_chord)
+            is_sec = bool(search_sec)
+            if is_cord == True:
+                split_1 = l.split("|")
+                dx = split_1[0]
+                dy = split_1[1]
+                m1.position = (dx, dy)
+            still_going = m1.position
+            if l == "left\n":
+                m1.click(Button.left)
+            if l == "right\n":
+                m1.click(Button.right)
+            if is_sec == True:
+                timein = float(l)
+                addmult = timein * multiplyer
+                time.sleep(addmult)
+            if m1.position != still_going:
+                break
+        loop_count += 1
     m1.position = macrostart
 
 def refresh():
@@ -196,21 +200,27 @@ pro_label = tk.Label(root, text="Enter Program Name", fg="black").grid(row=1, co
 pro_name = tk.Entry(root, text="Test ", fg="black", width=20)
 pro_name.grid(row=2, column=1)
 
-speed_txt = tk.Label(root, text="Macro Speed", fg="black", width=20).grid(row=3, column=1, pady=1)
+loop_text = tk.Label(root, text="Macro Loops", fg="black", width=20).grid(row=3, column=1, pady=1)
+loop_multi = tk.Scale(root, from_=1, to=5, orient="horizontal")
+loop_multi.grid(row=4, column=1)
+loop_multi.set(1)
+
+speed_txt = tk.Label(root, text="Macro Speed", fg="black", width=20).grid(row=5, column=1, pady=1)
 speed_multi = tk.Scale(root, from_=10, to=1, orient="horizontal")
-speed_multi.grid(row=4, column=1, pady=5)
+speed_multi.grid(row=6, column=1)
 speed_multi.set(5)
 
-startrecording = tk.Button(root, text="Start Recording Macro", fg="black", command=macro_on, width = 20).grid(row=5, column=1)
+startrecording = tk.Button(root, text="Start Recording Macro", fg="black", command=macro_on, width = 20).grid(row=7, column=1)
 
-saverecording = tk.Button(root, text="Save Macro", fg="black", command=saverecording, width=20).grid(row=6, column=1)
+saverecording = tk.Button(root, text="Save Macro", fg="black", command=saverecording, width=20).grid(row=8, column=1)
 
-playrecording = tk.Button(root, text="Play Macro", fg="black", command=playmacro, width=20).grid(row=7, column=1)
+playrecording = tk.Button(root, text="Play Macro", fg="black", command=playmacro, width=20).grid(row=9, column=1)
 
-delete_macro = tk.Button(root, text="Delete Macro", fg="black", command=deletemacro, width=20).grid(row=8, column=1)
+delete_macro = tk.Button(root, text="Delete Macro", fg="black", command=deletemacro, width=20).grid(row=10, column=1)
 
 
-refresh_button = tk.Button(root, text="Refresh", fg="black", command=refresh, width=10).grid(row=25, column=2)
+refresh_button = tk.Button(root, text="Refresh", fg="black", command=refresh, width=10)
+refresh_button.grid(row=25, column=2)
 
 
 output_txt = tk.Label(root, text="Saved Programs", fg="black", width=20).grid(row=1, column=2)
