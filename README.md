@@ -7,6 +7,7 @@
 ![](img/macro-example.gif)
 
 
+
 # Features
 * Naming of your macro profiles.
 * Easy speed control to change the speed of your macros.
